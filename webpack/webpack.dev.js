@@ -4,13 +4,13 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
   mode: 'development',
   devServer: {
-    hot: true
+    hot: true,
   },
   devtool: 'cheap-module-source-map',
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.name': JSON.stringify('Vishwas')
+      'process.env.name': JSON.stringify('Vishwas'),
     }),
-    new ReactRefreshWebpackPlugin({ overlay: false })
-  ]
+    new ReactRefreshWebpackPlugin({ overlay: false }),
+  ],
 };

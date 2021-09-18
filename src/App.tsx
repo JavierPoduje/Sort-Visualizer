@@ -1,9 +1,15 @@
-import './styles.css';
+// Modules
+import Navbar from './modules/Navbar/Navbar';
+import Canvas from './modules/Canvas/Canvas';
+
+// Styles
+import './assets/styles/index.scss';
 
 export const App = () => {
   return (
     <>
-      <h1>Hola Sort Visualizer - {process.env.name}</h1>
+      <Navbar />
+      <Canvas />
     </>
   );
 };
