@@ -1,0 +1,25 @@
+@import '../../assets/styles/_variables.scss';
+
+.canvas {
+  background-color: map-get($colors, cream);
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: 2% auto;
+  height: 100%;
+  min-height: 800px;
+
+  .bars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
+
+    .bar {
+      border-radius: $radius;
+      border: 1px solid map-get($colors, maroon);
+      width: 3rem;
+      margin: 0.5rem 0.5rem 3rem;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 // Components
 import Dropdown from '../../components/Dropdown/Dropdown';
+import Button from '../../components/Button/Button';
 
 // Styles
 import './navbar.scss';
@@ -30,7 +31,7 @@ const Navbar: React.FC = () => {
           />
         </li>
         <li className="item">
-          <button>Start</button>
+          <Button title={'Start'} />
         </li>
       </ul>
     </nav>
