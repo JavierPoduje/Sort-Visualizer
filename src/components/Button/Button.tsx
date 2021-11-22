@@ -8,9 +8,13 @@ interface IButton {
 
 const Button: React.FC<IButton> = ({ title, onClick }: IButton) =>
   onClick ? (
-    <button onClick={(e) => onClick(e)}>{title}</button>
+    <button onClick={(e) => onClick(e)}>
+      <h3>{title}</h3>
+    </button>
   ) : (
-    <button>{title}</button>
+    <button>
+      <h3>{title}</h3>
+    </button>
   );
 
 export default Button;

@@ -17,7 +17,9 @@ interface IDropdown {
 const Dropdown: React.FC<IDropdown> = ({ title, items }: IDropdown) => {
   return (
     <div className="dropdown">
-      <button>{title}</button>
+      <button>
+        <h3>{title}</h3>
+      </button>
       <ul>
         {items.map((item, idx) => (
           <li key={idx}>

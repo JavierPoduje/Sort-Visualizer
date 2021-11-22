@@ -1,18 +1,25 @@
+import { useContext } from 'react';
+
+// context
+import SortVisualizerContext from '../../context/context';
+
+// styles
 import './canvas.scss';
 
-const BARS = [2, 4, 3, 5, 7, 6, 8, 2, 9, 10];
-
 const Canvas: React.FC = () => {
+  const { bars } = useContext(SortVisualizerContext);
+
   return (
     <section className="canvas">
       <section className="bars">
-        {BARS.map((barHeight, idx) => (
-          <figure
-            key={idx}
-            className="bar"
-            style={{ height: barHeight * 50 }}
-          ></figure>
-        ))}
+        {bars &&
+          bars.map((barHeight, idx) => (
+            <figure
+              key={idx}
+              className="bar"
+              style={{ height: barHeight * 50 }}
+            ></figure>
+          ))}
       </section>
     </section>
   );

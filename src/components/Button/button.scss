@@ -1,6 +1,7 @@
 @import '../../assets/styles/_variables.scss';
 
 button {
+  color: map-get($colors, fg);
   border-radius: $radius;
   padding: 0.5rem;
   width: 100%;
@@ -8,6 +9,7 @@ button {
 
   background: none;
   text-decoration: none;
+  font-weight: bold;
   border: none;
 
   &:hover {

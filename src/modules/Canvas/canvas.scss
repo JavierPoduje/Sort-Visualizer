@@ -1,13 +1,15 @@
 @import '../../assets/styles/_variables.scss';
 
 .canvas {
-  background-color: map-get($colors, cream);
+  background-color: map-get($colors, bg1);
   display: flex;
   justify-content: center;
   width: 90%;
   margin: 2% auto;
   height: 100%;
   min-height: 800px;
+  border-radius: $radius;
+  box-shadow: $shadow;
 
   .bars {
     display: flex;
@@ -17,7 +19,7 @@
 
     .bar {
       border-radius: $radius;
-      border: 1px solid map-get($colors, maroon);
+      border: 1px solid map-get($colors, fg);
       width: 3rem;
       margin: 0.5rem 0.5rem 3rem;
     }
