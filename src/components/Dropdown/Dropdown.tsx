@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // Components
 import Button from '../Button/Button';
 
@@ -16,21 +18,31 @@ interface IDropdown {
 }
 
 const Dropdown: React.FC<IDropdown> = ({ title, items, info }: IDropdown) => {
+  const [showOptions, setShowOptions] = useState(false);
+
   return (
     <div className="dropdown">
-      <button>
+      <button onClick={() => setShowOptions(!showOptions)}>
         <h3>
           {/* TODO: info doesn't display his tag... */}
           {title} {info ?? <span className="info">{info}</span>}
         </h3>
       </button>
-      <ul>
-        {items.map((item, idx) => (
-          <li key={idx}>
-            <Button title={item.title} onClick={item.onClick} />
-          </li>
-        ))}
-      </ul>
+      {showOptions && (
+        <ul>
+          {items.map((item, idx) => (
+            <li key={idx}>
+              <Button
+                title={item.title}
+                onClick={(e) => {
+                  item.onClick(e);
+                  setShowOptions(!showOptions);
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

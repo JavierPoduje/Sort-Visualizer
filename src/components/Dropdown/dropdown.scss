@@ -18,7 +18,6 @@
     flex-direction: column;
     justify-content: space-around;
     border-radius: $radius;
-    opacity: 0;
     padding: 0;
     border: 1px solid map-get($colors, fg);
 
@@ -38,13 +37,6 @@
       &:hover {
         background-color: map-get($colors, bg1);
       }
-    }
-  }
-
-  button {
-    &:focus + ul {
-      opacity: 1;
-      transform: translateY(0px);
     }
   }
 }

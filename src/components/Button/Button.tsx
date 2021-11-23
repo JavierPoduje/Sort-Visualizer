@@ -6,15 +6,14 @@ interface IButton {
   onClick?: (event: React.MouseEvent) => void;
 }
 
-const Button: React.FC<IButton> = ({ title, onClick }: IButton) =>
-  onClick ? (
-    <button onClick={(e) => onClick(e)}>
-      <h3>{title}</h3>
-    </button>
-  ) : (
-    <button>
-      <h3>{title}</h3>
-    </button>
-  );
+const Button: React.FC<IButton> = ({ title, onClick }: IButton) => (
+  <button
+    onClick={(e) =>
+      onClick ? onClick(e) : console.log('nothing to do here...')
+    }
+  >
+    <h3>{title}</h3>
+  </button>
+);
 
 export default Button;

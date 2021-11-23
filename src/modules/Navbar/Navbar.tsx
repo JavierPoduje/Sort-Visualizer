@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import SortVisualizerContext from '../../context/context';
 
 // Components
@@ -25,6 +25,10 @@ const Navbar: React.FC = () => {
   const [numberOfBars, setNumberOfBars] = useState(10);
   const [speed, setSpeed] = useState(10);
   const [algorithm, setAlgorithm] = useState(contextAlgorithm);
+
+  useEffect(() => {
+    setContextBars(buildRandomArray(numberOfBars));
+  }, []);
 
   const handleRangeChange = (value: number) => {
     const a = Math.max(value, MIN_RANGE);
