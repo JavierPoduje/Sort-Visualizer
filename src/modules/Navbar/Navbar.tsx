@@ -19,9 +19,12 @@ import { InlineIcon } from '@iconify/react';
 import buildRandomArray from '../../utils/buildRandomArray';
 
 const Navbar: React.FC = () => {
+  const { setBars, setAlgorithm, algorithm } = useContext(
+    SortVisualizerContext
+  );
   const [numberOfBars, setNumberOfBars] = useState(10);
   const [speed, setSpeed] = useState(10);
-  const { setBars } = useContext(SortVisualizerContext);
+  const [localAlgorithm, setLocalAlgorithm] = useState(algorithm);
 
   const handleRangeChange = (
     value: number,
@@ -33,10 +36,12 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    if (numberOfBars && setBars) {
-      setBars(buildRandomArray(numberOfBars));
-    }
+    if (numberOfBars && setBars) setBars(buildRandomArray(numberOfBars));
   }, [numberOfBars]);
+
+  useEffect(() => {
+    if (localAlgorithm && setAlgorithm) setAlgorithm(localAlgorithm);
+  }, [localAlgorithm]);
 
   return (
     <nav className="navbar">
@@ -85,23 +90,38 @@ const Navbar: React.FC = () => {
             items={[
               {
                 title: 'Merge Sort',
-                onClick: () => console.log('click! Merge Sort...'),
+                onClick: () => {
+                  console.log('click! Merge Sort...');
+                  setLocalAlgorithm('MERGE_SORT');
+                },
               },
               {
                 title: 'Quick sort',
-                onClick: () => console.log('click! Quick Sort'),
+                onClick: () => {
+                  console.log('click! Quick Sort');
+                  setLocalAlgorithm('QUICK_SORT');
+                },
               },
               {
                 title: 'Bubble Sort',
-                onClick: () => console.log('click! Bubble Sort'),
+                onClick: () => {
+                  console.log('click! Bubble Sort');
+                  setLocalAlgorithm('BUBBLE_SORT');
+                },
               },
               {
                 title: 'Insertion Sort',
-                onClick: () => console.log('click! Insertion Sort'),
+                onClick: () => {
+                  console.log('click! Insertion Sort');
+                  setLocalAlgorithm('INSERTION_SORT');
+                },
               },
               {
                 title: 'Heap Sort',
-                onClick: () => console.log('click! Heap Sort'),
+                onClick: () => {
+                  console.log('click! Heap Sort');
+                  setLocalAlgorithm('HEAP_SORT');
+                },
               },
             ]}
           />
