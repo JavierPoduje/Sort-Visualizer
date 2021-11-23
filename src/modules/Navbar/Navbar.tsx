@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
+import SortVisualizerContext from '../../context/context';
 
 // Components
 import Dropdown from '../../components/Dropdown/Dropdown';
@@ -8,18 +15,28 @@ import Button from '../../components/Button/Button';
 import './navbar.scss';
 import { InlineIcon } from '@iconify/react';
 
+// Utils
+import buildRandomArray from '../../utils/buildRandomArray';
+
 const Navbar: React.FC = () => {
   const [numberOfBars, setNumberOfBars] = useState(10);
   const [speed, setSpeed] = useState(10);
+  const { setBars } = useContext(SortVisualizerContext);
 
   const handleRangeChange = (
     value: number,
     cb: Dispatch<SetStateAction<number>>
   ) => {
     const a = Math.max(value, 2);
-    const b = Math.min(a, 100);
+    const b = Math.min(a, 26);
     cb(b);
   };
+
+  useEffect(() => {
+    if (numberOfBars && setBars) {
+      setBars(buildRandomArray(numberOfBars));
+    }
+  }, [numberOfBars]);
 
   return (
     <nav className="navbar">
@@ -40,7 +57,7 @@ const Navbar: React.FC = () => {
             className="range-input"
             type="range"
             min="2"
-            max="100"
+            max="26"
             step="1"
             value={numberOfBars}
             onChange={(e) =>
@@ -67,16 +84,24 @@ const Navbar: React.FC = () => {
             title="Algorithms"
             items={[
               {
-                title: 'bubble sort',
-                onClick: () => console.log('click! bubble sort'),
+                title: 'Merge Sort',
+                onClick: () => console.log('click! Merge Sort...'),
               },
               {
-                title: 'merge sort',
-                onClick: () => console.log('click! merge sort'),
+                title: 'Quick sort',
+                onClick: () => console.log('click! Quick Sort'),
               },
               {
-                title: 'quick sort',
-                onClick: () => console.log('click! quicksort sort'),
+                title: 'Bubble Sort',
+                onClick: () => console.log('click! Bubble Sort'),
+              },
+              {
+                title: 'Insertion Sort',
+                onClick: () => console.log('click! Insertion Sort'),
+              },
+              {
+                title: 'Heap Sort',
+                onClick: () => console.log('click! Heap Sort'),
               },
             ]}
           />

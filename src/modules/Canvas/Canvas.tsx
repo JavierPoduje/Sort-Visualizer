@@ -17,7 +17,7 @@ const Canvas: React.FC = () => {
             <figure
               key={idx}
               className="bar"
-              style={{ height: barHeight * 50 }}
+              style={{ height: barHeight * 7 }}
             ></figure>
           ))}
       </section>

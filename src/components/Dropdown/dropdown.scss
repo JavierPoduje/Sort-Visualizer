@@ -7,7 +7,7 @@
   font-size: 1rem;
 
   ul {
-    background: map-get($colors, yellow);
+    background: map-get($colors, fg);
     position: absolute;
     margin-top: 2rem;
     display: flex;
@@ -15,19 +15,24 @@
     justify-content: space-around;
     border-radius: $radius;
     opacity: 0;
+    padding: 0;
+    border: 1px solid map-get($colors, fg);
 
     transform: translateY(-10px);
     transition: all 0.4s ease;
 
     li {
+      background: map-get($colors, bg);
       border-radius: $radius;
       width: 100%;
       height: 100%;
       align-items: center;
       justify-content: center;
+      border: 1px solid map-get($colors, fg);
+      transition: background-color 0.27s ease;
 
       &:hover {
-        background-color: map-get($colors, brown);
+        background-color: map-get($colors, bg1);
       }
     }
   }
