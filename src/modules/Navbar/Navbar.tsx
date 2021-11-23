@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useState,
-  useEffect,
-  useContext,
-} from 'react';
+import { useState, useContext } from 'react';
 import SortVisualizerContext from '../../context/context';
 
 // Components
@@ -18,30 +12,25 @@ import { InlineIcon } from '@iconify/react';
 // Utils
 import buildRandomArray from '../../utils/buildRandomArray';
 
+const MIN_RANGE = 2;
+const MAX_RANGE = 26;
+
 const Navbar: React.FC = () => {
-  const { setBars, setAlgorithm, algorithm } = useContext(
-    SortVisualizerContext
-  );
+  const {
+    setBars: setContextBars,
+    setAlgorithm: setContextAlgorithm,
+    setSpeed: setContextSpeed,
+    algorithm: contextAlgorithm,
+  } = useContext(SortVisualizerContext);
   const [numberOfBars, setNumberOfBars] = useState(10);
   const [speed, setSpeed] = useState(10);
-  const [localAlgorithm, setLocalAlgorithm] = useState(algorithm);
+  const [algorithm, setAlgorithm] = useState(contextAlgorithm);
 
-  const handleRangeChange = (
-    value: number,
-    cb: Dispatch<SetStateAction<number>>
-  ) => {
-    const a = Math.max(value, 2);
-    const b = Math.min(a, 26);
-    cb(b);
+  const handleRangeChange = (value: number) => {
+    const a = Math.max(value, MIN_RANGE);
+    const b = Math.min(a, MAX_RANGE);
+    return b;
   };
-
-  useEffect(() => {
-    if (numberOfBars && setBars) setBars(buildRandomArray(numberOfBars));
-  }, [numberOfBars]);
-
-  useEffect(() => {
-    if (localAlgorithm && setAlgorithm) setAlgorithm(localAlgorithm);
-  }, [localAlgorithm]);
 
   return (
     <nav className="navbar">
@@ -61,13 +50,15 @@ const Navbar: React.FC = () => {
           <input
             className="range-input"
             type="range"
-            min="2"
-            max="26"
+            min={MIN_RANGE}
+            max={MAX_RANGE}
             step="1"
             value={numberOfBars}
-            onChange={(e) =>
-              handleRangeChange(parseFloat(e.target.value), setNumberOfBars)
-            }
+            onChange={(e) => {
+              const parsedRange = handleRangeChange(parseFloat(e.target.value));
+              setNumberOfBars(parsedRange);
+              setContextBars(buildRandomArray(parsedRange));
+            }}
           />
         </li>
         <li className="item">
@@ -75,13 +66,15 @@ const Navbar: React.FC = () => {
           <input
             className="range-input"
             type="range"
-            min="2"
-            max="100"
+            min={MIN_RANGE}
+            max={MAX_RANGE}
             step="1"
             value={speed}
-            onChange={(e) =>
-              handleRangeChange(parseFloat(e.target.value), setSpeed)
-            }
+            onChange={(e) => {
+              const parsedRange = handleRangeChange(parseFloat(e.target.value));
+              setSpeed(parsedRange);
+              setContextSpeed(parsedRange);
+            }}
           />
         </li>
         <li className="item" style={{ width: '7rem' }}>
@@ -91,40 +84,41 @@ const Navbar: React.FC = () => {
               {
                 title: 'Merge Sort',
                 onClick: () => {
-                  console.log('click! Merge Sort...');
-                  setLocalAlgorithm('MERGE_SORT');
+                  setAlgorithm('MERGE_SORT');
+                  setContextAlgorithm('MERGE_SORT');
                 },
               },
               {
                 title: 'Quick sort',
                 onClick: () => {
-                  console.log('click! Quick Sort');
-                  setLocalAlgorithm('QUICK_SORT');
+                  setAlgorithm('QUICK_SORT');
+                  setContextAlgorithm('QUICK_SORT');
                 },
               },
               {
                 title: 'Bubble Sort',
                 onClick: () => {
-                  console.log('click! Bubble Sort');
-                  setLocalAlgorithm('BUBBLE_SORT');
+                  setAlgorithm('BUBBLE_SORT');
+                  setContextAlgorithm('BUBBLE_SORT');
                 },
               },
               {
                 title: 'Insertion Sort',
                 onClick: () => {
-                  console.log('click! Insertion Sort');
-                  setLocalAlgorithm('INSERTION_SORT');
+                  setAlgorithm('INSERTION_SORT');
+                  setContextAlgorithm('INSERTION_SORT');
                 },
               },
               {
                 title: 'Heap Sort',
                 onClick: () => {
-                  console.log('click! Heap Sort');
-                  setLocalAlgorithm('HEAP_SORT');
+                  setAlgorithm('HEAP_SORT');
+                  setContextAlgorithm('HEAP_SORT');
                 },
               },
             ]}
           />
+          <span>{algorithm}</span>
         </li>
         <li className="item">
           <Button title={'Run'} />

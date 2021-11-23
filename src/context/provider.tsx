@@ -17,6 +17,8 @@ const Provider: FC = ({ children }) => {
     algorithm: state.algorithm,
     setAlgorithm: (value: algorithmType) =>
       dispatch({ type: actions.SET_ALGORITHM, value }),
+    speed: state.speed,
+    setSpeed: (value: number) => dispatch({ type: actions.SET_SPEED, value }),
   };
 
   return (

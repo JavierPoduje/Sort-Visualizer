@@ -6,13 +6,15 @@ export type algorithmType =
   | 'HEAP_SORT';
 
 export interface ISortVisualizerState {
-  bars: number[] | undefined;
-  setBars?: (bars: number[]) => void;
-  algorithm: algorithmType | undefined;
-  setAlgorithm?: (algorithm: algorithmType) => void;
+  bars: number[];
+  setBars: (bars: number[]) => void;
+  algorithm: algorithmType;
+  setAlgorithm: (algorithm: algorithmType) => void;
+  speed: number;
+  setSpeed: (speed: number) => void;
 }
 
 export interface IPayload {
   type: string;
-  value?: number[] | algorithmType;
+  value?: number[] | algorithmType | number;
 }
