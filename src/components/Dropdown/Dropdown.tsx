@@ -12,13 +12,17 @@ type item = {
 interface IDropdown {
   title: string;
   items: item[];
+  info?: string;
 }
 
-const Dropdown: React.FC<IDropdown> = ({ title, items }: IDropdown) => {
+const Dropdown: React.FC<IDropdown> = ({ title, items, info }: IDropdown) => {
   return (
     <div className="dropdown">
       <button>
-        <h3>{title}</h3>
+        <h3>
+          {/* TODO: info doesn't display his tag... */}
+          {title} {info ?? <span className="info">{info}</span>}
+        </h3>
       </button>
       <ul>
         {items.map((item, idx) => (

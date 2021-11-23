@@ -6,6 +6,10 @@
   position: relative;
   font-size: 1rem;
 
+  .info {
+    color: map-get($colors, yellow);
+  }
+
   ul {
     background: map-get($colors, fg);
     position: absolute;

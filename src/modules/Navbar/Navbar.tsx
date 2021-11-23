@@ -32,6 +32,14 @@ const Navbar: React.FC = () => {
     return b;
   };
 
+  const algorithmLabels = {
+    MERGE_SORT: 'Merge Sort',
+    QUICK_SORT: 'Quick Sort',
+    BUBBLE_SORT: 'Bubble Sort',
+    INSERTION_SORT: 'Insertion Sort',
+    HEAP_SORT: 'Heap Sort',
+  };
+
   return (
     <nav className="navbar">
       <section className="logo-container">
@@ -46,7 +54,9 @@ const Navbar: React.FC = () => {
       </section>
       <ul className="items">
         <li className="item">
-          <h4>Array: </h4>
+          <h4>
+            Array: <span className="info">{numberOfBars}</span>
+          </h4>
           <input
             className="range-input"
             type="range"
@@ -62,7 +72,9 @@ const Navbar: React.FC = () => {
           />
         </li>
         <li className="item">
-          <h4>Speed: </h4>
+          <h4>
+            Speed: <span className="info">{speed}</span>
+          </h4>
           <input
             className="range-input"
             type="range"
@@ -77,9 +89,10 @@ const Navbar: React.FC = () => {
             }}
           />
         </li>
-        <li className="item" style={{ width: '7rem' }}>
+        <li className="item" style={{ width: '15rem' }}>
           <Dropdown
-            title="Algorithms"
+            title="Algorithms: "
+            info={algorithmLabels[algorithm]}
             items={[
               {
                 title: 'Merge Sort',
@@ -118,7 +131,6 @@ const Navbar: React.FC = () => {
               },
             ]}
           />
-          <span>{algorithm}</span>
         </li>
         <li className="item">
           <Button title={'Run'} />
