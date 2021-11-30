@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import SortVisualizerContext from '../../context/context';
+// import { BarType } from '../../context/types';
 
 // Components
 import Dropdown from '../../components/Dropdown/Dropdown';
@@ -10,24 +11,36 @@ import './navbar.scss';
 import { InlineIcon } from '@iconify/react';
 
 // Utils
-import buildRandomArray from '../../utils/buildRandomArray';
+import arrayByLength from '../../utils/arrayByLength';
 
 const MIN_RANGE = 2;
 const MAX_RANGE = 26;
 
 const Navbar: React.FC = () => {
   const {
-    setBars: setContextBars,
+    setBarsHeight: setContextBars,
     setAlgorithm: setContextAlgorithm,
     setSpeed: setContextSpeed,
     algorithm: contextAlgorithm,
+    runAlgorithm,
   } = useContext(SortVisualizerContext);
-  const [numberOfBars, setNumberOfBars] = useState(10);
+  const [barsHeight, setBarsHeight] = useState(10);
   const [speed, setSpeed] = useState(10);
   const [algorithm, setAlgorithm] = useState(contextAlgorithm);
 
+  const setBarsInContext = (
+    numOfBars: number,
+    cb: (barsHeight: number[]) => void
+  ) => {
+    const barsHeight: number[] = arrayByLength(numOfBars).map(
+      (height) => height
+    );
+    cb(barsHeight);
+  };
+
   useEffect(() => {
-    setContextBars(buildRandomArray(numberOfBars));
+    setBarsInContext(barsHeight, setContextBars);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRangeChange = (value: number) => {
@@ -40,8 +53,6 @@ const Navbar: React.FC = () => {
     MERGE_SORT: 'Merge Sort',
     QUICK_SORT: 'Quick Sort',
     BUBBLE_SORT: 'Bubble Sort',
-    INSERTION_SORT: 'Insertion Sort',
-    HEAP_SORT: 'Heap Sort',
   };
 
   return (
@@ -59,7 +70,7 @@ const Navbar: React.FC = () => {
       <ul className="items">
         <li className="item">
           <h4>
-            Array: <span className="info">{numberOfBars}</span>
+            Array: <span className="info">{barsHeight}</span>
           </h4>
           <input
             className="range-input"
@@ -67,11 +78,11 @@ const Navbar: React.FC = () => {
             min={MIN_RANGE}
             max={MAX_RANGE}
             step="1"
-            value={numberOfBars}
+            value={barsHeight}
             onChange={(e) => {
               const parsedRange = handleRangeChange(parseFloat(e.target.value));
-              setNumberOfBars(parsedRange);
-              setContextBars(buildRandomArray(parsedRange));
+              setBarsHeight(parsedRange);
+              setBarsInContext(parsedRange, setContextBars);
             }}
           />
         </li>
@@ -119,25 +130,11 @@ const Navbar: React.FC = () => {
                   setContextAlgorithm('BUBBLE_SORT');
                 },
               },
-              {
-                title: 'Insertion Sort',
-                onClick: () => {
-                  setAlgorithm('INSERTION_SORT');
-                  setContextAlgorithm('INSERTION_SORT');
-                },
-              },
-              {
-                title: 'Heap Sort',
-                onClick: () => {
-                  setAlgorithm('HEAP_SORT');
-                  setContextAlgorithm('HEAP_SORT');
-                },
-              },
             ]}
           />
         </li>
         <li className="item">
-          <Button title={'Run'} />
+          <Button title={'Run'} onClick={() => runAlgorithm()} />
         </li>
       </ul>
     </nav>

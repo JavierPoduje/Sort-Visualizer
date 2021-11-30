@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 // context
 import SortVisualizerContext from '../../context/context';
@@ -10,14 +10,26 @@ import Bar from '../../components/Bar/Bar';
 import './canvas.scss';
 
 const Canvas: React.FC = () => {
-  const { bars } = useContext(SortVisualizerContext);
+  const { barsHeight, setBars, setBarByIdx, bars } = useContext(
+    SortVisualizerContext
+  );
+
+  useEffect(() => {
+    if (!bars) setBars(new Array(barsHeight.length).fill(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [barsHeight]);
 
   return (
     <section className="canvas">
       <section className="bars">
-        {bars &&
-          bars.map((barHeight: number, idx) => (
-            <Bar key={idx} height={barHeight} />
+        {barsHeight &&
+          barsHeight.map((barHeight, idx) => (
+            <Bar
+              key={idx}
+              height={barHeight}
+              idx={idx}
+              setBarByIdxCallback={setBarByIdx}
+            />
           ))}
       </section>
     </section>

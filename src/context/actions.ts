@@ -1,7 +1,10 @@
 const actions = {
+  SET_BARS_HEIGHT: 'SET_BARS_HEIGHT',
   SET_BARS: 'SET_BARS',
+  SET_BAR_BY_IDX: 'SET_BAR_BY_IDX',
   SET_ALGORITHM: 'SET_ALGORITHM',
   SET_SPEED: 'SET_SPEED',
+  RUN_ALGORITHM: 'RUN_ALGORITHM',
 };
 
 export default actions;
