@@ -13,7 +13,7 @@ interface IProps {
 
 const Bar: React.FC<IProps> = (props) => {
   const { height, setBarByIdxCallback, idx } = props;
-  const barRef = useRef(null);
+  const barRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const barObj = {

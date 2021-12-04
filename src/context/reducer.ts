@@ -7,16 +7,21 @@ import {
   IPayload,
   ISortVisualizerState,
   SetBarByIdxInputType,
+  BuildAnimationInputType,
 } from './types';
 
-// TODO:
-// este error ocurre porque el `value` del IPayload puede ser de tipo `number[] | algorithmType`,
-// pero los métodos no pueden recibir los dos tipos, sino solo uno de ellos.
-// Investigar cómo resolver este tipado.
+import buildAnimations from '../algorithms/buildAnimations';
+
 const reducer: Reducer<ISortVisualizerState, IPayload> = (state, payload) => {
   switch (payload.type) {
+    case actions.BUILD_ANIMATION:
+      const { bars: contextBars, algorithm } =
+        payload.value as BuildAnimationInputType;
+      return { ...state, animation: buildAnimations(contextBars, algorithm) };
     case actions.SET_BARS_HEIGHT:
       return { ...state, barsHeight: payload.value as number[] };
+    case actions.CLEAN_ANIMATION:
+      return { ...state, animation: [] };
     case actions.SET_BARS:
       return { ...state, bars: payload.value as BarType[] };
     case actions.SET_BAR_BY_IDX:
@@ -29,8 +34,6 @@ const reducer: Reducer<ISortVisualizerState, IPayload> = (state, payload) => {
       return { ...state, algorithm: payload.value as AlgorithmType };
     case actions.SET_SPEED:
       return { ...state, speed: payload.value as number };
-    case actions.RUN_ALGORITHM:
-      return { ...state };
     default:
       return state;
   }

@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
+
 import SortVisualizerContext from '../../context/context';
-// import { BarType } from '../../context/types';
+import { AnimationType } from '../../context/types';
+import useInterval from '../hooks/useInterval';
 
 // Components
 import Dropdown from '../../components/Dropdown/Dropdown';
@@ -18,14 +20,19 @@ const MAX_RANGE = 26;
 
 const Navbar: React.FC = () => {
   const {
-    setBarsHeight: setContextBars,
-    setAlgorithm: setContextAlgorithm,
-    setSpeed: setContextSpeed,
     algorithm: contextAlgorithm,
-    runAlgorithm,
+    bars: contextBars,
+    setAlgorithm: setContextAlgorithm,
+    setBarsHeight: setContextBars,
+    setSpeed: setContextSpeed,
+    buildAnimation,
+    setBars,
+    animation: contextAnimation,
+    cleanAnimation,
   } = useContext(SortVisualizerContext);
   const [barsHeight, setBarsHeight] = useState(10);
   const [speed, setSpeed] = useState(10);
+  const [stepIdx, setStepIdx] = useState(0);
   const [algorithm, setAlgorithm] = useState(contextAlgorithm);
 
   const setBarsInContext = (
@@ -36,18 +43,66 @@ const Navbar: React.FC = () => {
       (height) => height
     );
     cb(barsHeight);
+    setBars([]);
+  };
+
+  const performAnimation = ({
+    compared,
+    swap,
+    elementsToBeSwapped,
+  }: AnimationType) => {
+    // set compared a different color to the compared elements
+    setTimeout(() => {
+      compared.forEach((bar) => {
+        if (bar.ref.current) bar.ref.current.className = 'bar compared';
+      });
+    }, 300);
+
+    // swap if necessary
+    setTimeout(() => {
+      if (swap) {
+        const [left, right] = elementsToBeSwapped;
+        const leftElem = left.ref.current;
+        const rightElem = right.ref.current;
+
+        if (leftElem && rightElem) {
+          [leftElem.style.height, rightElem.style.height] = [
+            rightElem.style.height,
+            leftElem.style.height,
+          ];
+        }
+      }
+    }, 600);
+
+    setTimeout(() => {
+      compared.forEach((bar) => {
+        if (bar.ref.current) bar.ref.current.className = 'bar';
+      });
+    }, 900);
+  };
+
+  useInterval(() => {
+    if (contextAnimation.length && stepIdx < contextAnimation.length) {
+      const animation = contextAnimation[stepIdx];
+      performAnimation(animation);
+      setStepIdx(stepIdx + 1);
+    } else if (contextAnimation.length && stepIdx >= contextAnimation.length) {
+      setStepIdx(0);
+      cleanAnimation();
+    }
+  }, 700);
+
+  const runAlgorithm = () => {
+    buildAnimation({ bars: contextBars, algorithm });
   };
 
   useEffect(() => {
     setBarsInContext(barsHeight, setContextBars);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [barsHeight]);
 
-  const handleRangeChange = (value: number) => {
-    const a = Math.max(value, MIN_RANGE);
-    const b = Math.min(a, MAX_RANGE);
-    return b;
-  };
+  const handleRangeChange = (value: number) =>
+    Math.min(Math.max(value, MIN_RANGE), MAX_RANGE);
 
   const algorithmLabels = {
     MERGE_SORT: 'Merge Sort',

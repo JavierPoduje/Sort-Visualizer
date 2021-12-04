@@ -1,20 +1,18 @@
-import { ISortVisualizerState, BarType } from './types';
+import { ISortVisualizerState, BarType, AnimationType } from './types';
 
 const initialState: ISortVisualizerState = {
-  barsHeight: [] as number[],
-  setBarsHeight: () => undefined,
-
+  animation: [] as AnimationType[],
   algorithm: 'BUBBLE_SORT',
-  setAlgorithm: () => undefined,
-
-  speed: 2,
-  setSpeed: () => undefined,
-
   bars: [] as BarType[],
-  setBars: () => undefined,
+  barsHeight: [] as number[],
+  buildAnimation: () => undefined,
+  cleanAnimation: () => undefined,
+  setAlgorithm: () => undefined,
   setBarByIdx: () => undefined,
-
-  runAlgorithm: () => undefined,
+  setBars: () => undefined,
+  setBarsHeight: () => undefined,
+  setSpeed: () => undefined,
+  speed: 2,
 };
 
 export default initialState;
