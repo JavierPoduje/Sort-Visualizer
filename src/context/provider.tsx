@@ -21,9 +21,12 @@ const Provider: FC = ({ children }) => {
     animation: state.animation,
     bars: state.bars,
     barsHeight: state.barsHeight,
+    runAlgorithm: state.runAlgorithm,
     buildAnimation: (value: BuildAnimationInputType) =>
       dispatch({ type: actions.BUILD_ANIMATION, value }),
     cleanAnimation: () => dispatch({ type: actions.CLEAN_ANIMATION, value }),
+    setRunAlgorithm: (value: boolean) =>
+      dispatch({ type: actions.SET_RUN_ALGORITHM, value }),
     setAlgorithm: (value: AlgorithmType) =>
       dispatch({ type: actions.SET_ALGORITHM, value }),
     setBarByIdx: (value: SetBarByIdxInputType) =>

@@ -24,6 +24,8 @@ const reducer: Reducer<ISortVisualizerState, IPayload> = (state, payload) => {
       return { ...state, animation: [] };
     case actions.SET_BARS:
       return { ...state, bars: payload.value as BarType[] };
+    case actions.SET_RUN_ALGORITHM:
+      return { ...state, runAlgorithm: payload.value as boolean };
     case actions.SET_BAR_BY_IDX:
       const bars = state.bars;
       const { bar, idx } = payload.value as SetBarByIdxInputType;
