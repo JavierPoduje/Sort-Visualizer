@@ -26,15 +26,15 @@ export interface ISortVisualizerState {
   animation: AnimationType[];
   bars: BarType[];
   barsHeight: number[];
-  buildAnimation: (payload: BuildAnimationInputType) => void;
+  buildAnimation: (payloadValue: BuildAnimationInputType) => void;
   cleanAnimation: () => void;
   runAlgorithm: boolean;
-  setAlgorithm: (algorithm: AlgorithmType) => void;
-  setBarByIdx: (payload: SetBarByIdxInputType) => void;
-  setBars: (bars: BarType[]) => void;
-  setBarsHeight: (bars: number[]) => void;
-  setRunAlgorithm: (payload: boolean) => void;
-  setSpeed: (speed: number) => void;
+  setAlgorithm: (payloadValue: AlgorithmType) => void;
+  setBarByIdx: (payloadValue: SetBarByIdxInputType) => void;
+  setBars: (payloadValue: BarType[]) => void;
+  setBarsHeight: (payloadValue: number[]) => void;
+  setRunAlgorithm: (payloadValue: boolean) => void;
+  setSpeed: (payloadValue: number) => void;
   speed: number;
 }
 

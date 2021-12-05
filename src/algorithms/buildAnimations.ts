@@ -1,9 +1,12 @@
 import { BarType, AlgorithmType } from '../context/types';
 
 import { AnimationType } from './types';
-import bubbleSort from './bubble';
 
-const buildAnimation = (
+// sort algorithms
+import bubbleSort from './bubble';
+import quickSort from './quick';
+
+const buildAnimations = (
   bars: BarType[],
   algorithm: AlgorithmType
 ): AnimationType[] => {
@@ -14,12 +17,11 @@ const buildAnimation = (
       console.log('not supported just yet...');
       return [];
     case 'QUICK_SORT':
-      console.log('not supported just yet...');
-      return [];
+      return quickSort(bars);
     default:
       console.log('Algorithm not supported...');
       return [];
   }
 };
 
-export default buildAnimation;
+export default buildAnimations;
