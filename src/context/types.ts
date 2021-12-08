@@ -6,6 +6,12 @@ export type AnimationType = {
   elementsToBeSwapped: [BarType, BarType];
 };
 
+export type MergeSortAnimationType = {
+  compared: BarType[];
+  haveToChangeHeight: boolean;
+  heightChange: { bar: BarType; newHeight: number };
+};
+
 export type BarType = {
   height: number;
   ref: React.RefObject<HTMLInputElement>;
@@ -23,7 +29,7 @@ export type BuildAnimationInputType = {
 
 export interface ISortVisualizerState {
   algorithm: AlgorithmType;
-  animation: AnimationType[];
+  animation: (AnimationType | MergeSortAnimationType)[];
   bars: BarType[];
   barsHeight: number[];
   buildAnimation: (payloadValue: BuildAnimationInputType) => void;

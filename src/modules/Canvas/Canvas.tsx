@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 
 // context
-import { AnimationType } from '../../context/types';
+import { AnimationType, MergeSortAnimationType } from '../../context/types';
 import SortVisualizerContext from '../../context/context';
 
 // components
@@ -13,36 +13,52 @@ import './canvas.scss';
 
 const Canvas: React.FC = () => {
   const {
-    barsHeight,
-    setBars,
-    setBarByIdx,
-    bars,
-    runAlgorithm,
-    setRunAlgorithm,
+    algorithm,
     animation: contextAnimation,
+    bars,
+    barsHeight,
     cleanAnimation,
+    runAlgorithm,
+    setBarByIdx,
+    setBars,
+    setRunAlgorithm,
   } = useContext(SortVisualizerContext);
   const [stepIdx, setStepIdx] = useState(0);
 
-  const performAnimation = ({
-    compared,
-    swap,
-    elementsToBeSwapped,
-  }: AnimationType) => {
-    // set compared a different color to the compared elements
+  const performMergeSortAnimation = (
+    animation: MergeSortAnimationType
+  ): void => {
+    const { compared, haveToChangeHeight, heightChange } = animation;
+
     setTimeout(() => {
-      compared.forEach((bar) => {
-        if (bar.ref.current) bar.ref.current.className = 'bar compared';
+      compared.forEach((bar, idx) => {
+        bar.ref.current!.className = `bar ${idx === 0 ? 'pivot' : 'compared'}`;
       });
     }, 300);
 
-    // swap if necessary
+    setTimeout(() => {
+      if (haveToChangeHeight) {
+        const { bar, newHeight } = heightChange;
+        const currBar = bar.ref.current;
+        if (currBar) currBar.style.height = `${(newHeight * 7).toString()}px`;
+      }
+    }, 600);
+  };
+
+  const performBubbleSortAnimation = (animation: AnimationType) => {
+    const { compared, swap, elementsToBeSwapped } = animation;
+
+    setTimeout(() => {
+      compared.forEach((bar) => {
+        bar.ref.current!.className = 'bar compared';
+      });
+    }, 300);
+
     setTimeout(() => {
       if (swap) {
         const [left, right] = elementsToBeSwapped;
         const leftElem = left.ref.current;
         const rightElem = right.ref.current;
-
         if (leftElem && rightElem) {
           [leftElem.style.height, rightElem.style.height] = [
             rightElem.style.height,
@@ -51,7 +67,45 @@ const Canvas: React.FC = () => {
         }
       }
     }, 600);
+  };
 
+  const performQuickSortAnimation = (animation: AnimationType) => {
+    const { compared, swap, elementsToBeSwapped } = animation;
+
+    setTimeout(() => {
+      compared.forEach((bar, idx) => {
+        bar.ref.current!.className = `bar ${idx === 0 ? 'pivot' : 'compared'}`;
+      });
+    }, 300);
+
+    setTimeout(() => {
+      if (swap) {
+        const [left, right] = elementsToBeSwapped;
+        const leftElem = left.ref.current;
+        const rightElem = right.ref.current;
+        if (leftElem && rightElem) {
+          [leftElem.style.height, rightElem.style.height] = [
+            rightElem.style.height,
+            leftElem.style.height,
+          ];
+        }
+      }
+    }, 600);
+  };
+
+  const performAnimation = (
+    animation: AnimationType | MergeSortAnimationType
+  ) => {
+    if (algorithm === 'BUBBLE_SORT') {
+      performBubbleSortAnimation(animation as AnimationType);
+    } else if (algorithm === 'QUICK_SORT') {
+      performQuickSortAnimation(animation as AnimationType);
+    } else if (algorithm === 'MERGE_SORT') {
+      performMergeSortAnimation(animation as MergeSortAnimationType);
+    }
+
+    // set compared elements to their original color
+    const { compared } = animation;
     setTimeout(() => {
       compared.forEach((bar) => {
         if (bar.ref.current) bar.ref.current.className = 'bar';

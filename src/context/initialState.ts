@@ -1,8 +1,13 @@
-import { ISortVisualizerState, BarType, AnimationType } from './types';
+import {
+  ISortVisualizerState,
+  BarType,
+  AnimationType,
+  MergeSortAnimationType,
+} from './types';
 
 const initialState: ISortVisualizerState = {
-  algorithm: 'BUBBLE_SORT',
-  animation: [] as AnimationType[],
+  algorithm: 'MERGE_SORT',
+  animation: [] as (AnimationType | MergeSortAnimationType)[],
   bars: [] as BarType[],
   barsHeight: [] as number[],
   buildAnimation: () => undefined,

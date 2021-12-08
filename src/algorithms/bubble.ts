@@ -1,5 +1,4 @@
-import { BarType } from '../context/types';
-import { AnimationType } from './types';
+import { BarType, AnimationType } from '../context/types';
 
 const bubbleSort = (originalArr: BarType[]) => {
   const arr = [...originalArr];

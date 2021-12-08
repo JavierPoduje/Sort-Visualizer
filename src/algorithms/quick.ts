@@ -1,5 +1,4 @@
-import { BarType } from '../context/types';
-import { AnimationType } from './types';
+import { BarType, AnimationType } from '../context/types';
 
 const quickSort = (originalArr: BarType[]) => {
   const arrCopy = [...originalArr];

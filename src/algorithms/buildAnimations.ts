@@ -1,21 +1,25 @@
-import { BarType, AlgorithmType } from '../context/types';
-
-import { AnimationType } from './types';
+import {
+  BarType,
+  AlgorithmType,
+  AnimationType,
+  MergeSortAnimationType,
+} from '../context/types';
 
 // sort algorithms
 import bubbleSort from './bubble';
 import quickSort from './quick';
+import mergeSort from './merge';
 
 const buildAnimations = (
   bars: BarType[],
   algorithm: AlgorithmType
-): AnimationType[] => {
+): (AnimationType | MergeSortAnimationType)[] => {
   switch (algorithm) {
     case 'BUBBLE_SORT':
       return bubbleSort(bars);
     case 'MERGE_SORT':
-      console.log('not supported just yet...');
-      return [];
+      const animations = mergeSort(bars);
+      return animations;
     case 'QUICK_SORT':
       return quickSort(bars);
     default:
