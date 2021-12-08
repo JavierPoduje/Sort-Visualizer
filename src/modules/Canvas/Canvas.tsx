@@ -23,6 +23,7 @@ const Canvas: React.FC = () => {
     setBars,
     setRunAlgorithm,
     speed,
+    setNavbarButtonsDisabled,
   } = useContext(SortVisualizerContext);
   const [stepIdx, setStepIdx] = useState(0);
 
@@ -132,6 +133,7 @@ const Canvas: React.FC = () => {
         setStepIdx(0);
         setRunAlgorithm(false);
         cleanAnimation();
+        setNavbarButtonsDisabled(false);
       }
     },
     runAlgorithm ? speed * 350 : null

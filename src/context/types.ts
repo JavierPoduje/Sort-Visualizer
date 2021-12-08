@@ -34,11 +34,13 @@ export interface ISortVisualizerState {
   barsHeight: number[];
   buildAnimation: (payloadValue: BuildAnimationInputType) => void;
   cleanAnimation: () => void;
+  navbarButtonsDisabled: boolean;
   runAlgorithm: boolean;
   setAlgorithm: (payloadValue: AlgorithmType) => void;
   setBarByIdx: (payloadValue: SetBarByIdxInputType) => void;
   setBars: (payloadValue: BarType[]) => void;
   setBarsHeight: (payloadValue: number[]) => void;
+  setNavbarButtonsDisabled: (payloadValue: boolean) => void;
   setRunAlgorithm: (payloadValue: boolean) => void;
   setSpeed: (payloadValue: number) => void;
   speed: number;

@@ -12,7 +12,21 @@ button {
   font-weight: bold;
   border: none;
 
+  transition: all 0.27s ease;
+  h3 {
+    transition: all 0.27s ease;
+  }
+
   &:hover {
     cursor: pointer;
+  }
+
+  &.disabled {
+    background-color: map-get($colors, bg1);
+    cursor: default;
+
+    h3 {
+      color: map-get($colors, bg) !important;
+    }
   }
 }

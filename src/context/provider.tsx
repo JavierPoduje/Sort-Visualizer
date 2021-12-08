@@ -22,6 +22,7 @@ const Provider: FC = ({ children }) => {
     bars: state.bars,
     barsHeight: state.barsHeight,
     runAlgorithm: state.runAlgorithm,
+    navbarButtonsDisabled: state.navbarButtonsDisabled,
     buildAnimation: (value: BuildAnimationInputType) =>
       dispatch({ type: actions.BUILD_ANIMATION, value }),
     cleanAnimation: () => dispatch({ type: actions.CLEAN_ANIMATION, value }),
@@ -34,6 +35,8 @@ const Provider: FC = ({ children }) => {
     setBars: (value: BarType[]) => dispatch({ type: actions.SET_BARS, value }),
     setBarsHeight: (value: number[]) =>
       dispatch({ type: actions.SET_BARS_HEIGHT, value }),
+    setNavbarButtonsDisabled: (value: boolean) =>
+      dispatch({ type: actions.SET_NAVBAR_BUTTONS_DISABLED, value }),
     setSpeed: (value: number) => dispatch({ type: actions.SET_SPEED, value }),
     speed: state.speed,
   };

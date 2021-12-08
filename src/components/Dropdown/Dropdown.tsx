@@ -15,16 +15,21 @@ interface IDropdown {
   title: string;
   items: item[];
   info?: string;
+  disabled: boolean;
 }
 
-const Dropdown: React.FC<IDropdown> = ({ title, items, info }: IDropdown) => {
+const Dropdown: React.FC<IDropdown> = ({
+  title,
+  items,
+  info,
+  disabled,
+}: IDropdown) => {
   const [showOptions, setShowOptions] = useState(false);
 
   return (
-    <div className="dropdown">
-      <button onClick={() => setShowOptions(!showOptions)}>
+    <div className={`dropdown ${disabled ? 'disabled' : ''}`}>
+      <button onClick={() => setShowOptions(!showOptions)} disabled={disabled}>
         <h3>
-          {/* TODO: info doesn't display his tag... */}
           {title} {info ?? <span className="info">{info}</span>}
         </h3>
       </button>
@@ -38,6 +43,7 @@ const Dropdown: React.FC<IDropdown> = ({ title, items, info }: IDropdown) => {
                   item.onClick(e);
                   setShowOptions(!showOptions);
                 }}
+                disabled={disabled}
               />
             </li>
           ))}

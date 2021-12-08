@@ -39,4 +39,21 @@
       }
     }
   }
+
+  transition: all 0.27s ease;
+  button {
+    h3 {
+      transition: all 0.27s ease;
+    }
+  }
+
+  &.disabled {
+    button {
+      cursor: default;
+
+      h3 {
+        color: map-get($colors, bg1);
+      }
+    }
+  }
 }

@@ -21,12 +21,14 @@ const Navbar: React.FC = () => {
   const {
     algorithm: contextAlgorithm,
     bars: contextBars,
-    setAlgorithm: setContextAlgorithm,
-    setBarsHeight: setContextBars,
-    setSpeed: setContextSpeed,
     buildAnimation,
+    navbarButtonsDisabled,
+    setAlgorithm: setContextAlgorithm,
     setBars,
+    setBarsHeight: setContextBars,
+    setNavbarButtonsDisabled,
     setRunAlgorithm,
+    setSpeed: setContextSpeed,
   } = useContext(SortVisualizerContext);
   const [barsHeight, setBarsHeight] = useState(10);
   const [speed, setSpeed] = useState(10);
@@ -70,7 +72,7 @@ const Navbar: React.FC = () => {
         />
       </section>
       <ul className="items">
-        <li className="item">
+        <li className={`item ${navbarButtonsDisabled ? 'disabled' : ''}`}>
           <h4>
             Array: <span className="info">{barsHeight}</span>
           </h4>
@@ -81,6 +83,7 @@ const Navbar: React.FC = () => {
             max={MAX_RANGE}
             step="1"
             value={barsHeight}
+            disabled={navbarButtonsDisabled}
             onChange={(e) => {
               const parsedRange = handleRangeChange(parseFloat(e.target.value));
               setBarsHeight(parsedRange);
@@ -88,7 +91,7 @@ const Navbar: React.FC = () => {
             }}
           />
         </li>
-        <li className="item">
+        <li className={`item ${navbarButtonsDisabled ? 'disabled' : ''}`}>
           <h4>
             Speed: <span className="info">{speed}</span>
           </h4>
@@ -98,6 +101,7 @@ const Navbar: React.FC = () => {
             min={MIN_RANGE}
             max={MAX_RANGE}
             step="1"
+            disabled={navbarButtonsDisabled}
             value={speed}
             onChange={(e) => {
               const parsedRange = handleRangeChange(parseFloat(e.target.value));
@@ -110,6 +114,7 @@ const Navbar: React.FC = () => {
           <Dropdown
             title="Algorithms: "
             info={algorithmLabels[algorithm]}
+            disabled={navbarButtonsDisabled}
             items={[
               {
                 title: 'Merge Sort',
@@ -140,8 +145,10 @@ const Navbar: React.FC = () => {
             title={'Run'}
             onClick={() => {
               buildAnimation({ bars: contextBars, algorithm });
+              setNavbarButtonsDisabled(true);
               setRunAlgorithm(true);
             }}
+            disabled={navbarButtonsDisabled}
           />
         </li>
       </ul>
