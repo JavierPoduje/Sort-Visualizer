@@ -22,6 +22,7 @@ const Canvas: React.FC = () => {
     setBarByIdx,
     setBars,
     setRunAlgorithm,
+    speed,
   } = useContext(SortVisualizerContext);
   const [stepIdx, setStepIdx] = useState(0);
 
@@ -34,7 +35,7 @@ const Canvas: React.FC = () => {
       compared.forEach((bar, idx) => {
         bar.ref.current!.className = `bar ${idx === 0 ? 'pivot' : 'compared'}`;
       });
-    }, 300);
+    }, speed * 150);
 
     setTimeout(() => {
       if (haveToChangeHeight) {
@@ -42,7 +43,7 @@ const Canvas: React.FC = () => {
         const currBar = bar.ref.current;
         if (currBar) currBar.style.height = `${(newHeight * 7).toString()}px`;
       }
-    }, 600);
+    }, speed * 300);
   };
 
   const performBubbleSortAnimation = (animation: AnimationType) => {
@@ -52,7 +53,7 @@ const Canvas: React.FC = () => {
       compared.forEach((bar) => {
         bar.ref.current!.className = 'bar compared';
       });
-    }, 300);
+    }, speed * 150);
 
     setTimeout(() => {
       if (swap) {
@@ -66,7 +67,7 @@ const Canvas: React.FC = () => {
           ];
         }
       }
-    }, 600);
+    }, speed * 300);
   };
 
   const performQuickSortAnimation = (animation: AnimationType) => {
@@ -76,7 +77,7 @@ const Canvas: React.FC = () => {
       compared.forEach((bar, idx) => {
         bar.ref.current!.className = `bar ${idx === 0 ? 'pivot' : 'compared'}`;
       });
-    }, 300);
+    }, speed * 150);
 
     setTimeout(() => {
       if (swap) {
@@ -90,7 +91,7 @@ const Canvas: React.FC = () => {
           ];
         }
       }
-    }, 600);
+    }, speed * 300);
   };
 
   const performAnimation = (
@@ -110,7 +111,7 @@ const Canvas: React.FC = () => {
       compared.forEach((bar) => {
         if (bar.ref.current) bar.ref.current.className = 'bar';
       });
-    }, 900);
+    }, speed * 450);
   };
 
   useEffect(() => {
@@ -133,7 +134,7 @@ const Canvas: React.FC = () => {
         cleanAnimation();
       }
     },
-    runAlgorithm ? 700 : null
+    runAlgorithm ? speed * 350 : null
   );
 
   return (

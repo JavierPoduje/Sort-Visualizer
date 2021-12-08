@@ -35,7 +35,8 @@ const reducer: Reducer<ISortVisualizerState, IPayload> = (state, payload) => {
     case actions.SET_ALGORITHM:
       return { ...state, algorithm: payload.value as AlgorithmType };
     case actions.SET_SPEED:
-      return { ...state, speed: payload.value as number };
+      const speed = 1 - (payload.value as number) / 100;
+      return { ...state, speed };
     default:
       return state;
   }

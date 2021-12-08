@@ -6,7 +6,7 @@ import {
 } from './types';
 
 const initialState: ISortVisualizerState = {
-  algorithm: 'MERGE_SORT',
+  algorithm: 'BUBBLE_SORT',
   animation: [] as (AnimationType | MergeSortAnimationType)[],
   bars: [] as BarType[],
   barsHeight: [] as number[],
@@ -19,7 +19,7 @@ const initialState: ISortVisualizerState = {
   setBarsHeight: () => undefined,
   setRunAlgorithm: () => undefined,
   setSpeed: () => undefined,
-  speed: 2,
+  speed: 0.9,
 };
 
 export default initialState;
