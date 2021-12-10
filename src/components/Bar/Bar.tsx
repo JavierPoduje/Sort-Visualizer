@@ -9,10 +9,11 @@ interface IProps {
   height: number;
   idx: number;
   setBarByIdxCallback: (payload: SetBarByIdxInputType) => void;
+  alternativeDisplay: boolean;
 }
 
 const Bar: React.FC<IProps> = (props) => {
-  const { height, setBarByIdxCallback, idx } = props;
+  const { height, setBarByIdxCallback, idx, alternativeDisplay } = props;
   const barRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const Bar: React.FC<IProps> = (props) => {
 
   return (
     <figure
-      className="bar"
+      className={`bar ${alternativeDisplay ? 'alternative' : ''}`}
       style={{ height: height * 7 }}
       ref={barRef}
     ></figure>

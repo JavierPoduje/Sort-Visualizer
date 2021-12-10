@@ -18,6 +18,7 @@ const Provider: FC = ({ children }) => {
 
   const value = {
     algorithm: state.algorithm,
+    animationFinished: state.animationFinished,
     animation: state.animation,
     bars: state.bars,
     barsHeight: state.barsHeight,
@@ -25,6 +26,8 @@ const Provider: FC = ({ children }) => {
     navbarButtonsDisabled: state.navbarButtonsDisabled,
     buildAnimation: (value: BuildAnimationInputType) =>
       dispatch({ type: actions.BUILD_ANIMATION, value }),
+    setAnimationFinished: (value: boolean) =>
+      dispatch({ type: actions.SET_ANIMATION_FINISHED, value }),
     cleanAnimation: () => dispatch({ type: actions.CLEAN_ANIMATION, value }),
     setRunAlgorithm: (value: boolean) =>
       dispatch({ type: actions.SET_RUN_ALGORITHM, value }),

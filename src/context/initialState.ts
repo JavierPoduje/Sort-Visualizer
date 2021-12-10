@@ -8,6 +8,7 @@ import {
 const initialState: ISortVisualizerState = {
   algorithm: 'BUBBLE_SORT',
   animation: [] as (AnimationType | MergeSortAnimationType)[],
+  animationFinished: false,
   bars: [] as BarType[],
   barsHeight: [] as number[],
   buildAnimation: () => undefined,
@@ -15,6 +16,7 @@ const initialState: ISortVisualizerState = {
   navbarButtonsDisabled: false,
   runAlgorithm: false,
   setAlgorithm: () => undefined,
+  setAnimationFinished: () => undefined,
   setBarByIdx: () => undefined,
   setBars: () => undefined,
   setBarsHeight: () => undefined,

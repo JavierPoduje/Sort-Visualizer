@@ -24,6 +24,8 @@ const Canvas: React.FC = () => {
     setRunAlgorithm,
     speed,
     setNavbarButtonsDisabled,
+    setAnimationFinished,
+    animationFinished,
   } = useContext(SortVisualizerContext);
   const [stepIdx, setStepIdx] = useState(0);
 
@@ -134,9 +136,10 @@ const Canvas: React.FC = () => {
         setRunAlgorithm(false);
         cleanAnimation();
         setNavbarButtonsDisabled(false);
+        setAnimationFinished(true);
       }
     },
-    runAlgorithm ? speed * 350 : null
+    runAlgorithm ? speed * 500 : null
   );
 
   return (
@@ -149,6 +152,7 @@ const Canvas: React.FC = () => {
               height={barHeight}
               idx={idx}
               setBarByIdxCallback={setBarByIdx}
+              alternativeDisplay={animationFinished}
             />
           ))}
       </section>

@@ -30,6 +30,7 @@ export type BuildAnimationInputType = {
 export interface ISortVisualizerState {
   algorithm: AlgorithmType;
   animation: (AnimationType | MergeSortAnimationType)[];
+  animationFinished: boolean;
   bars: BarType[];
   barsHeight: number[];
   buildAnimation: (payloadValue: BuildAnimationInputType) => void;
@@ -37,6 +38,7 @@ export interface ISortVisualizerState {
   navbarButtonsDisabled: boolean;
   runAlgorithm: boolean;
   setAlgorithm: (payloadValue: AlgorithmType) => void;
+  setAnimationFinished: (payloadValue: boolean) => void;
   setBarByIdx: (payloadValue: SetBarByIdxInputType) => void;
   setBars: (payloadValue: BarType[]) => void;
   setBarsHeight: (payloadValue: number[]) => void;

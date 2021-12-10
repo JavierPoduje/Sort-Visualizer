@@ -28,6 +28,8 @@ const reducer: Reducer<ISortVisualizerState, IPayload> = (state, payload) => {
       return { ...state, navbarButtonsDisabled: payload.value as boolean };
     case actions.SET_RUN_ALGORITHM:
       return { ...state, runAlgorithm: payload.value as boolean };
+    case actions.SET_ANIMATION_FINISHED:
+      return { ...state, animationFinished: payload.value as boolean };
     case actions.SET_BAR_BY_IDX:
       const bars = state.bars;
       const { bar, idx } = payload.value as SetBarByIdxInputType;

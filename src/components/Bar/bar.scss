@@ -8,11 +8,13 @@
   margin: 0.5rem 0.5rem 3rem;
   transition: all 0.27s ease;
 }
-
 .compared {
   background-color: map-get($colors, cyan) !important;
 }
-
 .pivot {
   background-color: map-get($colors, red) !important;
+}
+.alternative {
+  background-color: map-get($colors, _aqua) !important;
+  border-color: map-get($colors, brown);
 }
