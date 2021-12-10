@@ -29,6 +29,8 @@ const Navbar: React.FC = () => {
     setNavbarButtonsDisabled,
     setRunAlgorithm,
     setSpeed: setContextSpeed,
+    animationFinished,
+    setAnimationFinished,
   } = useContext(SortVisualizerContext);
   const [barsHeight, setBarsHeight] = useState(10);
   const [speed, setSpeed] = useState(10);
@@ -72,7 +74,11 @@ const Navbar: React.FC = () => {
         />
       </section>
       <ul className="items">
-        <li className={`item ${navbarButtonsDisabled ? 'disabled' : ''}`}>
+        <li
+          className={`item ${
+            navbarButtonsDisabled || animationFinished ? 'disabled' : ''
+          }`}
+        >
           <h4>
             Array: <span className="info">{barsHeight}</span>
           </h4>
@@ -83,7 +89,7 @@ const Navbar: React.FC = () => {
             max={MAX_RANGE}
             step="1"
             value={barsHeight}
-            disabled={navbarButtonsDisabled}
+            disabled={navbarButtonsDisabled || animationFinished}
             onChange={(e) => {
               const parsedRange = handleRangeChange(parseFloat(e.target.value));
               setBarsHeight(parsedRange);
@@ -91,7 +97,11 @@ const Navbar: React.FC = () => {
             }}
           />
         </li>
-        <li className={`item ${navbarButtonsDisabled ? 'disabled' : ''}`}>
+        <li
+          className={`item ${
+            navbarButtonsDisabled || animationFinished ? 'disabled' : ''
+          }`}
+        >
           <h4>
             Speed: <span className="info">{speed}</span>
           </h4>
@@ -101,7 +111,7 @@ const Navbar: React.FC = () => {
             min={MIN_RANGE}
             max={MAX_RANGE}
             step="1"
-            disabled={navbarButtonsDisabled}
+            disabled={navbarButtonsDisabled || animationFinished}
             value={speed}
             onChange={(e) => {
               const parsedRange = handleRangeChange(parseFloat(e.target.value));
@@ -114,7 +124,7 @@ const Navbar: React.FC = () => {
           <Dropdown
             title="Algorithms: "
             info={algorithmLabels[algorithm]}
-            disabled={navbarButtonsDisabled}
+            disabled={navbarButtonsDisabled || animationFinished}
             items={[
               {
                 title: 'Merge Sort',
@@ -142,11 +152,16 @@ const Navbar: React.FC = () => {
         </li>
         <li className="item">
           <Button
-            title={'Run'}
+            title={animationFinished ? 'Go Again!' : 'Run'}
             onClick={() => {
-              buildAnimation({ bars: contextBars, algorithm });
-              setNavbarButtonsDisabled(true);
-              setRunAlgorithm(true);
+              if (animationFinished) {
+                setBarsInContext(barsHeight, setContextBars);
+                setAnimationFinished(false);
+              } else {
+                buildAnimation({ bars: contextBars, algorithm });
+                setNavbarButtonsDisabled(true);
+                setRunAlgorithm(true);
+              }
             }}
             disabled={navbarButtonsDisabled}
           />
