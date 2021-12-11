@@ -29,4 +29,10 @@ button {
       color: map-get($colors, bg) !important;
     }
   }
+
+  &.alternativeColor {
+    h3 {
+      color: map-get($colors, brown);
+    }
+  }
 }

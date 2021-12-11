@@ -15,7 +15,7 @@ import { InlineIcon } from '@iconify/react';
 import arrayByLength from '../../utils/arrayByLength';
 
 const MIN_RANGE = 2;
-const MAX_RANGE = 26;
+const MAX_RANGE = 60;
 
 const Navbar: React.FC = () => {
   const {
@@ -164,6 +164,7 @@ const Navbar: React.FC = () => {
               }
             }}
             disabled={navbarButtonsDisabled}
+            alternativeColor={animationFinished}
           />
         </li>
       </ul>

@@ -83,7 +83,6 @@ const helper = (
     });
   }
 
-  // replace bars on the original arr
   original = [
     ...original.slice(0, leftBoundary),
     ...sorted,

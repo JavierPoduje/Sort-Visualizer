@@ -4,13 +4,23 @@ import './button.scss';
 interface IButton {
   title: string;
   disabled: boolean;
+  alternativeColor?: boolean;
   onClick?: (event: React.MouseEvent) => void;
 }
 
-const Button: React.FC<IButton> = ({ title, onClick, disabled }: IButton) => {
+const Button: React.FC<IButton> = ({
+  title,
+  onClick,
+  disabled,
+  alternativeColor,
+}: IButton) => {
+  const className = `${disabled ? 'disabled' : ''} ${
+    alternativeColor ? 'alternativeColor' : ''
+  }`;
+
   return (
     <button
-      className={disabled ? 'disabled' : ''}
+      className={className}
       onClick={(e) =>
         onClick ? onClick(e) : console.log('nothing to do here...')
       }
