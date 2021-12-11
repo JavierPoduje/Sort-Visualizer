@@ -8,7 +8,6 @@ export type AnimationType = {
 
 export type MergeSortAnimationType = {
   compared: BarType[];
-  haveToChangeHeight: boolean;
   heightChange: { bar: BarType; newHeight: number };
 };
 

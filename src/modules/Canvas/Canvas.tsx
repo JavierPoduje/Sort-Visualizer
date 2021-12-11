@@ -32,7 +32,7 @@ const Canvas: React.FC = () => {
   const performMergeSortAnimation = (
     animation: MergeSortAnimationType
   ): void => {
-    const { compared, haveToChangeHeight, heightChange } = animation;
+    const { compared, heightChange } = animation;
 
     setTimeout(() => {
       compared.forEach((bar, idx) => {
@@ -41,11 +41,9 @@ const Canvas: React.FC = () => {
     }, speed * 150);
 
     setTimeout(() => {
-      if (haveToChangeHeight) {
-        const { bar, newHeight } = heightChange;
-        const currBar = bar.ref.current;
-        if (currBar) currBar.style.height = `${(newHeight * 7).toString()}px`;
-      }
+      const { bar, newHeight } = heightChange;
+      const currBar = bar.ref.current;
+      if (currBar) currBar.style.height = `${(newHeight * 7).toString()}px`;
     }, speed * 300);
   };
 

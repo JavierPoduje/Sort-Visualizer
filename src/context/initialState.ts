@@ -6,7 +6,7 @@ import {
 } from './types';
 
 const initialState: ISortVisualizerState = {
-  algorithm: 'BUBBLE_SORT',
+  algorithm: 'MERGE_SORT',
   animation: [] as (AnimationType | MergeSortAnimationType)[],
   animationFinished: false,
   bars: [] as BarType[],
