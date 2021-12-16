@@ -23,7 +23,7 @@ const Bar: React.FC<IProps> = (props) => {
     };
     setBarByIdxCallback({ bar: barObj, idx });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [height]);
+  }, [height, alternativeDisplay, idx]);
 
   return (
     <figure
